@@ -1,16 +1,16 @@
 package kr.ac.ssu.hellospringsecurity.service;
 
 import kr.ac.ssu.hellospringsecurity.domain.Customer;
-import kr.ac.ssu.hellospringsecurity.repository.InMemoryDatabase;
+import kr.ac.ssu.hellospringsecurity.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
-    private final InMemoryDatabase inMemoryDatabase;
+    private final CustomerRepository customerRepository;
 
     public void joinCustomer(Customer customer) {
         String username = customer.getUsername();
@@ -19,10 +19,10 @@ public class CustomerService {
             throw new RuntimeException("username or password cannot be empty.");
         }
 
-        inMemoryDatabase.insertCustomer(customer);
+        customerRepository.insertCustomer(customer);
     }
 
-    public Set<Customer> getAllCustomer() {
-        return inMemoryDatabase.getAllCustomer();
+    public List<Customer> getAllCustomer() {
+        return customerRepository.getAllCustomer();
     }
 }

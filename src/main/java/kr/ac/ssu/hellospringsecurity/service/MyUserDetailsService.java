@@ -1,7 +1,7 @@
 package kr.ac.ssu.hellospringsecurity.service;
 
 import kr.ac.ssu.hellospringsecurity.domain.Customer;
-import kr.ac.ssu.hellospringsecurity.repository.InMemoryDatabase;
+import kr.ac.ssu.hellospringsecurity.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,11 +18,11 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
-    private final InMemoryDatabase inMemoryDatabase;
+    private final CustomerRepository customerRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Customer customer = inMemoryDatabase.findCustomer(username);
+        Customer customer = customerRepository.findCustomer(username);
         if (customer == null) {
             throw new RuntimeException("user can't find. username: " + username);
         }

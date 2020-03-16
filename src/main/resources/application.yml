@@ -7,3 +7,11 @@ management:
     health:
       enabled: true
       show-details: never
+
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: my-first-mongo-db
